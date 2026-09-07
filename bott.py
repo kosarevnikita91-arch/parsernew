@@ -41,7 +41,8 @@ load_dotenv()
 
 API_ID = 24078627
 API_HASH ="4bfeafd8075403696854929d52fc5b7b"
-BOT_TOKEN = os.getenv("7718898350:AAGzjXyQcOPnEyxnT70mTHWxnVOLCjwldDU")
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+
 
 
 RECIPIENT_IDS = [
