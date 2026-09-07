@@ -1117,6 +1117,7 @@ async def auto_command(message: Message):
         "Автоматический парсинг запущен "
         "на 6 часов."
     )
+asyncio.run(start())
 
 
 @dp.message(Command("status"))
