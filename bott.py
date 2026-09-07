@@ -1343,7 +1343,12 @@ Telegram_client = TelegramClient(
     API_HASH,
 )
 try:
-    
+    async def main():
+    await dp.start_polling(bot)
+
+if __name__ == "__main__":
+    asyncio.run(main())
+
 except KeyboardInterrupt:
     print("Остановка программы")
 
