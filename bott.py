@@ -1304,16 +1304,21 @@ async def try_command(message: Message):
 # Запуск
 # =========================================================
 
-    async def main() -> None:
-        init_db()
+   # =========================================================
+# Запуск
+# =========================================================
 
-        await telegram_client.connect()
+async def main() -> None:
+    init_db()
 
-        if not await telegram_client.is_user_authorized():
-            print("Сессия не авторизована. Сначала создайте её отдельно.")
-            return
+    await telegram_client.connect()
 
-        print("Telegram-клиент подключён.")
+    if not await telegram_client.is_user_authorized():
+        print("Сессия не авторизована.")
+        await telegram_client.disconnect()
+        return
+
+    print("Telegram-клиент подключён.")
 
     me = await telegram_client.get_me()
 
@@ -1332,24 +1337,13 @@ async def try_command(message: Message):
         await bot.session.close()
         await telegram_client.disconnect()
         db.close()
-SESSION_DIR = Path(__file__).resolve().parent / "sessions"
-SESSION_DIR.mkdir(exist_ok=True)
 
-TELEGRAM_SESSION = str(SESSION_DIR / "telegram_profile")
-
-Telegram_client = TelegramClient(
-    TELEGRAM_SESSION,
-    API_ID,
-    API_HASH,
-)
-try:
-    async def main():
-    await dp.start_polling(bot)
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    try:
+        asyncio.run(main())
+    except KeyboardInterrupt:
+        print("Остановка программы")
 
-except KeyboardInterrupt:
-    print("Остановка программы")
 
 
