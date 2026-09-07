@@ -1343,7 +1343,7 @@ Telegram_client = TelegramClient(
     API_HASH,
 )
 try:
-    asyncio.run(main())
+    
 except KeyboardInterrupt:
     print("Остановка программы")
 
