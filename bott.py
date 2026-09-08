@@ -40,7 +40,7 @@ api_id = int(os.getenv("API_ID"))
 api_hash = os.getenv("API_HASH")
 
 telegram_client = TelegramClient(
-    "telegram_session",
+    "telegram_profile",
     api_id,
     api_hash
 )
