@@ -1328,7 +1328,7 @@ async def main() -> None:
     if not await telegram_client.is_user_authorized():
         print(
             "Сессия не авторизована. "
-            "Проверь файл sessions/telegram_profile.session"
+            "Проверь файл telegram_profile.session"
         )
         await telegram_client.disconnect()
         return
@@ -1342,6 +1342,7 @@ async def main() -> None:
         await bot.session.close()
         await telegram_client.disconnect()
         db.close()
+
 
 
 
