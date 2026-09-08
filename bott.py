@@ -1311,23 +1311,9 @@ async def try_command(message: Message):
 async def main() -> None:
     init_db()
 
-    await telegram_client.connect()
+    await telegram_client.start()
 
-    if not await telegram_client.is_user_authorized():
-        print("Сессия не авторизована.")
-        await telegram_client.disconnect()
-        return
-
-    print("Telegram-клиент подключён.")
-
-    me = await telegram_client.get_me()
-
-    print(
-        f"Профиль подключён: "
-        f"{me.first_name or ''} "
-        f"@{me.username or 'без_username'}"
-    )
-
+    print("Telegram-клиент авторизован.")
     print("Бот запущен.")
 
     try:
@@ -1337,6 +1323,7 @@ async def main() -> None:
         await bot.session.close()
         await telegram_client.disconnect()
         db.close()
+
 
 
 if __name__ == "__main__":
