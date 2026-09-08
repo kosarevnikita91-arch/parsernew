@@ -14,7 +14,7 @@ from telethon.tl.functions.channels import (
 from telethon.tl.functions.messages import (
     GetDialogFiltersRequest,
 )
-
+load_dotenv()
 from telethon.tl.types import (
     ChannelParticipantAdmin,
     ChannelParticipantCreator,
@@ -24,7 +24,7 @@ from telethon.tl.types import (
     UserStatusLastWeek,
     UserStatusLastMonth,
 )
-load_dotenv()
+
 
 API_ID = os.getenv("API_ID")
 API_HASH = os.getenv("API_HASH")
