@@ -20,7 +20,7 @@ from telethon.tl.functions.channels import (
 from telethon.tl.functions.messages import (
     GetDialogFiltersRequest,
 )
-load_dotenv()
+
 from telethon.tl.types import (
     ChannelParticipantAdmin,
     ChannelParticipantCreator,
@@ -35,9 +35,10 @@ from telethon.tl.types import (
 import os
 from dotenv import load_dotenv
 from telethon import TelegramClient
+SESSION_PATH = Path(os.getenv("SESSION_PATH", "/app/session"))
 
 load_dotenv()
-
+str(SESSION_PATH),
 api_id = int(os.getenv("API_ID"))
 api_hash = os.getenv("API_HASH")
 
@@ -99,7 +100,7 @@ telegram_client = TelegramClient(
     api_hash,
 )
 print("BOT_TOKEN существует:", bool(os.getenv("BOT_TOKEN")))
-SESSION_PATH = Path("/app/session")
+
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 
