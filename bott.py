@@ -33,11 +33,10 @@ from telethon.tl.types import (
     UserStatusRecently,
     UserStatusLastWeek,
     UserStatusLastMonth,
-)
-SESSION_DIR = Path(__file__).resolve().parent / "sessions"
+SESSION_FILE = Path(__file__).resolve().parent / "telegram_profile"
 
 telegram_client = TelegramClient(
-    str(SESSION_DIR / "telegram_profile"),
+    str(SESSION_FILE),
     API_ID,
     API_HASH,
 )
