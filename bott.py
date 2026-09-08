@@ -39,8 +39,11 @@ load_dotenv()
 api_id = int(os.getenv("API_ID"))
 api_hash = os.getenv("API_HASH")
 
+BASE_DIR = Path(__file__).resolve().parent
+SESSION_PATH = BASE_DIR / "telegram_profile"
+
 telegram_client = TelegramClient(
-    "telegram_profile",
+     str(SESSION_PATH),
     api_id,
     api_hash
 )
