@@ -1,38 +1,35 @@
-import os
-import re
-import asyncio
-from pathlib import Path
-
-import sqlite3
-from telethon.errors import FloodWaitError
-
-
-from collections import Counter
-from datetime import datetime, timedelta, timezone
-
-from dotenv import load_dotenv
-
 from aiogram import Bot, Dispatcher
 from aiogram.filters import Command
 from aiogram.types import Message
 
 from telethon import TelegramClient
 from telethon.errors import FloodWaitError
+
 from telethon.tl.functions.channels import (
     GetParticipantRequest,
     GetFullChannelRequest,
 )
+
 from telethon.tl.functions.messages import (
     GetDialogFiltersRequest,
 )
-from telethon.tl.types import ChannelParticipantAdmin, ChannelParticipantCreator, DialogFilter, UserStatusOnline, UserStatusRecently, UserStatusLastWeek, UserStatusLastMonth
 
+from telethon.tl.types import (
+    ChannelParticipantAdmin,
+    ChannelParticipantCreator,
+    DialogFilter,
+    UserStatusOnline,
+    UserStatusRecently,
+    UserStatusLastWeek,
+    UserStatusLastMonth,
 )
 
 telegram_client = TelegramClient(
-    "/app/telegram_profile",
-    API_ID,
-    API_HASH, )
+    "telegram_session",
+    api_id,
+    api_hash,
+)
+
 
 
 
