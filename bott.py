@@ -33,7 +33,7 @@ from telethon.tl.types import (
     UserStatusRecently,
     UserStatusLastWeek,
     UserStatusLastMonth,
-
+)
 telegram_client = TelegramClient(
     "/app/telegram_profile",
     API_ID,
