@@ -96,9 +96,10 @@ parsing_lock = asyncio.Lock()
 
 telegram_client = TelegramClient(
     "telegram_profile",
-    API_ID,
-    API_HASH,
+    api_id,
+    api_hash,
 )
+
 
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
