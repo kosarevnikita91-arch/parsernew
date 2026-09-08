@@ -25,7 +25,7 @@ from telethon.tl.types import (
 )
 load_dotenv()
 
-API_ID = 24078627
+API_ID = os.getenv("API_ID")
 API_HASH = os.getenv("API_HASH")
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 
