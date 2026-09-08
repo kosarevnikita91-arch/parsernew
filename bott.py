@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 import os
 from telethon import TelegramClient
 from telethon.errors import FloodWaitError
+import asyncio
 
 from telethon.tl.functions.channels import (
     GetParticipantRequest,
