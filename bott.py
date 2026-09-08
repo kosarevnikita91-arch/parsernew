@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 import os
 from telethon import TelegramClient
 from telethon.errors import FloodWaitError
+from pathlib import Path
 
 
 from telethon.tl.functions.channels import (
