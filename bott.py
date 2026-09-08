@@ -23,6 +23,11 @@ from telethon.tl.types import (
     UserStatusLastWeek,
     UserStatusLastMonth,
 )
+load_dotenv()
+
+API_ID = 24078627
+API_HASH = os.getenv("API_HASH")
+BOT_TOKEN = os.getenv("BOT_TOKEN")
 
 telegram_client = TelegramClient(
     "telegram_session",
@@ -37,11 +42,7 @@ telegram_client = TelegramClient(
 # Настройки
 # =========================================================
 
-load_dotenv()
 
-API_ID = 24078627
-API_HASH = os.getenv("API_HASH")
-BOT_TOKEN = os.getenv("BOT_TOKEN")
 
 
 
