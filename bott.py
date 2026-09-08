@@ -104,6 +104,12 @@ telegram_client = TelegramClient(
     api_hash,
 )
 
+print("Текущая папка:", Path.cwd())
+print("Путь к сессии:", SESSION_PATH.with_suffix(".session"))
+print(
+    "Файл существует:",
+    SESSION_PATH.with_suffix(".session").exists()
+)
 
 
 dp = Dispatcher()
