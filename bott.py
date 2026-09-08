@@ -101,7 +101,6 @@ telegram_client = TelegramClient(
 )
 
 
-bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
 
 
