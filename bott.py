@@ -98,6 +98,8 @@ telegram_client = TelegramClient(
     api_id,
     api_hash,
 )
+print("BOT_TOKEN существует:", bool(os.getenv("BOT_TOKEN")))
+
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 
 if not BOT_TOKEN:
