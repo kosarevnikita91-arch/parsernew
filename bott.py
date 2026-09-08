@@ -1,6 +1,7 @@
 from aiogram import Bot, Dispatcher
 from aiogram.filters import Command
 from aiogram.types import Message
+from dotenv import load_dotenv
 
 from telethon import TelegramClient
 from telethon.errors import FloodWaitError
