@@ -98,6 +98,11 @@ telegram_client = TelegramClient(
     api_id,
     api_hash,
 )
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+
+if not BOT_TOKEN:
+    raise ValueError("BOT_TOKEN не найден")
+
 bot = Bot(token=BOT_TOKEN)
 
 print("Текущая папка:", Path.cwd())
