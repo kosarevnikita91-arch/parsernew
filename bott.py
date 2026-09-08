@@ -99,6 +99,7 @@ telegram_client = TelegramClient(
     api_hash,
 )
 print("BOT_TOKEN существует:", bool(os.getenv("BOT_TOKEN")))
+SESSION_PATH = Path("/app/session")
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 
