@@ -32,14 +32,15 @@ from telethon import TelegramClient
 
 load_dotenv()
 
-API_ID = int(os.getenv("API_ID"))
-API_HASH = os.getenv("API_HASH")
+api_id = int(os.getenv("API_ID"))
+api_hash = os.getenv("API_HASH")
 
 telegram_client = TelegramClient(
     "telegram_session",
-    API_ID,
-    API_HASH
+    api_id,
+    api_hash
 )
+
 
 
 
