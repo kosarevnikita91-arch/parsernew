@@ -32,8 +32,8 @@ from telethon.tl.types import ChannelParticipantAdmin, ChannelParticipantCreator
 telegram_client = TelegramClient(
     "/app/telegram_profile",
     API_ID,
-    API_HASH,
-
+    API_HASH, 
+)
 
 
 # =========================================================
