@@ -26,7 +26,7 @@ from telethon.tl.types import (
 
 telegram_client = TelegramClient(
     "telegram_session",
-    api_id,
+    API_ID,
     api_hash
 )
 
