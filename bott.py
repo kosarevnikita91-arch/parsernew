@@ -26,15 +26,21 @@ from telethon.tl.types import (
 )
 
 
-API_ID = os.getenv("API_ID")
+import os
+from dotenv import load_dotenv
+from telethon import TelegramClient
+
+load_dotenv()
+
+API_ID = int(os.getenv("API_ID"))
 API_HASH = os.getenv("API_HASH")
-BOT_TOKEN = os.getenv("BOT_TOKEN")
 
 telegram_client = TelegramClient(
     "telegram_session",
     API_ID,
-    api_hash
+    API_HASH
 )
+
 
 
 
