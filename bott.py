@@ -1311,10 +1311,17 @@ async def try_command(message: Message):
 async def main() -> None:
     init_db()
 
-    await telegram_client.start()
+    await telegram_client.connect()
 
-    print("Telegram-клиент авторизован.")
-    print("Бот запущен.")
+    if not await telegram_client.is_user_authorized():
+        print(
+            "Сессия не авторизована. "
+            "Проверь файл sessions/telegram_profile.session"
+        )
+        await telegram_client.disconnect()
+        return
+
+    print("Telegram-клиент подключён.")
 
     try:
         await dp.start_polling(bot)
