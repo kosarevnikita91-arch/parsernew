@@ -25,15 +25,16 @@ from telethon.tl.functions.channels import (
 from telethon.tl.functions.messages import (
     GetDialogFiltersRequest,
 )
-from telethon.tl.types import ChannelParticipantAdmin
-from telethon.tl.types import ChannelParticipantCreator
-from telethon.tl.types import DialogFilter
-from telethon.tl.types import UserStatusOnline
-from telethon.tl.types import UserStatusRecently
-from telethon.tl.types import UserStatusLastWeek
-from telethon.tl.types import UserStatusLastMonth
-
+from telethon.tl.types import (
+    ChannelParticipantAdmin,
+    ChannelParticipantCreator,
+    DialogFilter,
+    UserStatusOnline,
+    UserStatusRecently,
+    UserStatusLastWeek,
+    UserStatusLastMonth,
 )
+
 telegram_client = TelegramClient(
     "/app/telegram_profile",
     API_ID,
