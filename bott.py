@@ -98,6 +98,7 @@ telegram_client = TelegramClient(
     api_id,
     api_hash,
 )
+bot = Bot(token=BOT_TOKEN)
 
 print("Текущая папка:", Path.cwd())
 print("Путь к сессии:", SESSION_PATH.with_suffix(".session"))
