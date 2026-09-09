@@ -52,17 +52,15 @@ telegram_client = TelegramClient(
 print("telegram_client создан:", "telegram_client" in globals())
 print("Файл:", __file__)
 
-if not await telegram_client.is_user_authorized():
-
 async def main():
     await telegram_client.start(bot_token=BOT_TOKEN)
 
-    print("Бот авторизован")
+    print("Бот запущен")
     await telegram_client.run_until_disconnected()
+
 
 if __name__ == "__main__":
     asyncio.run(main())
-
 
 
 
