@@ -44,11 +44,13 @@ telegram_client = TelegramClient(
 )
 
 async def main():
-    await telegram_client.start(bot_token=BOT_TOKEN)
-    print("Бот авторизован и запущен")
+    await client.start(bot_token=BOT_TOKEN)
+    print("Бот авторизован")
+    print(await client.get_me())
 
-with telegram_client:
-    telegram_client.loop.run_until_complete(main())
+client.loop.run_until_complete(main())
+client.run_until_disconnected()
+
 
 
 
