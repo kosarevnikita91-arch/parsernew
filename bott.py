@@ -35,7 +35,7 @@ from telethon.tl.types import (
 import os
 from dotenv import load_dotenv
 from telethon import TelegramClient
-SESSION_PATH = Path(os.getenv("SESSION_PATH", "/app/session"))
+SESSION_PATH = Path("/app/telegram_profile")
 
 load_dotenv()
 str(SESSION_PATH),
