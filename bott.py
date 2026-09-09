@@ -41,6 +41,29 @@ from telethon import TelegramClient
 import asyncio
 from telethon import TelegramClient
 
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s | %(levelname)s | %(message)s"
+)
+
+print("Файл bott.py запущен", flush=True)
+
+try:
+    API_ID = int(os.environ["API_ID"])
+    API_HASH = os.environ["API_HASH"]
+    BOT_TOKEN = os.environ["BOT_TOKEN"]
+
+    print("Переменные окружения загружены", flush=True)
+    print(f"API_ID: {API_ID}", flush=True)
+    print(f"API_HASH задан: {bool(API_HASH)}", flush=True)
+    print(f"BOT_TOKEN задан: {bool(BOT_TOKEN)}", flush=True)
+
+except KeyError as error:
+    print(f"Не задана переменная окружения: {error.args[0]}", flush=True)
+    raise
+except ValueError:
+    print("Ошибка: API_ID должен быть целым числом", flush=True)
+    raise
 API_ID = int(os.environ["API_ID"])
 API_HASH = os.environ["API_HASH"]
 BOT_TOKEN = os.environ["BOT_TOKEN"]
