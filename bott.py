@@ -39,8 +39,8 @@ SESSION_PATH = Path("/app/session")
 
 telegram_client = TelegramClient(
     str(SESSION_PATH),
-    api_hash,
-    api_hash
+    API_ID,
+    API_HASH
 )
 
 async def main():
