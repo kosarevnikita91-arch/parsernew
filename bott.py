@@ -1373,26 +1373,17 @@ async def try_command(message: Message):
 # Запуск
 # =========================================================
 async def main():
-    init_db()
+    print("Подключение к Telegram...", flush=True)
 
-    # 1. Подключение и авторизация бота
     await telegram_client.start(bot_token=BOT_TOKEN)
 
-    # 2. Проверка авторизации
-    if not await telegram_client.is_user_authorized():
-        print("Сессия не авторизована")
-        await telegram_client.disconnect()
-        return
+    me = await telegram_client.get_me()
+    print(
+        f"Бот авторизован: @{me.username or me.id}",
+        flush=True
+    )
 
-    # 3. Запуск Telegram-бота
-    await dp.start_polling(bot)
+    print("Бот успешно запущен", flush=True)
 
-
-if __name__ == "__main__":
-    try:
-        asyncio.run(main())
-    except KeyboardInterrupt:
-        print("Остановка программы")
-
-
+    await telegram_client.run_until_disconnected()
 
