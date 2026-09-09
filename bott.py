@@ -34,32 +34,31 @@ from telethon.tl.types import (
 
 
 import os
-from dotenv import load_dotenv
+import asyncio
+from pathlib import Path
 from telethon import TelegramClient
-load_dotenv()
 
-SESSION_PATH = Path("/app/telegram_profile")
-
-API_ID_RAW = os.getenv("API_ID")
+API_ID = int(os.getenv("API_ID"))
 API_HASH = os.getenv("API_HASH")
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 
-if not API_ID_RAW:
-    raise ValueError("Переменная API_ID не найдена")
+SESSION_PATH = Path("/app/telegram_profile")
 
-if not API_HASH:
-    raise ValueError("Переменная API_HASH не найдена")
-
-if not BOT_TOKEN:
-    raise ValueError("Переменная BOT_TOKEN не найдена")
-
-API_ID = int(API_ID_RAW)
-
-client = TelegramClient(
+telegram_client = TelegramClient(
     str(SESSION_PATH),
     API_ID,
     API_HASH
 )
+
+async def main():
+    await telegram_client.start(bot_token=BOT_TOKEN)
+
+    print("Бот авторизован")
+    await telegram_client.run_until_disconnected()
+
+if __name__ == "__main__":
+    asyncio.run(main())
+
 
 
 
