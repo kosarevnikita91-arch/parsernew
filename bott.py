@@ -42,7 +42,7 @@ API_ID = int(os.getenv("API_ID"))
 API_HASH = os.getenv("API_HASH")
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 
-SESSION_PATH = Path("/app/telegram_profile")
+SESSION_PATH = Path("/app/parser_session")
 
 telegram_client = TelegramClient(
     str(SESSION_PATH),
