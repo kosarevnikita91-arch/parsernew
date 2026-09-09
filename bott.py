@@ -110,11 +110,7 @@ parsing_lock = asyncio.Lock()
 # Клиенты
 # =========================================================
 
-telegram_client = TelegramClient(
-    "telegram_profile",
-    api_id,
-    api_hash,
-)
+
 print("BOT_TOKEN существует:", bool(os.getenv("BOT_TOKEN")))
 
 
