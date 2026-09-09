@@ -49,6 +49,10 @@ telegram_client = TelegramClient(
     API_ID,
     API_HASH
 )
+print("telegram_client создан:", "telegram_client" in globals())
+print("Файл:", __file__)
+
+if not await telegram_client.is_user_authorized():
 
 async def main():
     await telegram_client.start(bot_token=BOT_TOKEN)
@@ -1345,31 +1349,20 @@ async def try_command(message: Message):
    # =========================================================
 # Запуск
 # =========================================================
-
-async def main() -> None:
+async def main():
     init_db()
 
-    await telegram_client.connect()
+    # 1. Подключение и авторизация бота
+    await telegram_client.start(bot_token=BOT_TOKEN)
 
-    if not await Telegram_client.is_user_authorized():
-        print(
-            "Сессия не авторизована. "
-            "Проверь файл telegram_profile.session"
-        )
+    # 2. Проверка авторизации
+    if not await telegram_client.is_user_authorized():
+        print("Сессия не авторизована")
         await telegram_client.disconnect()
         return
 
-    print("Telegram-клиент подключён.")
-
-    try:
-        await dp.start_polling(bot)
-
-    finally:
-        await bot.session.close()
-        await telegram_client.disconnect()
-        db.close()
-
-
+    # 3. Запуск Telegram-бота
+    await dp.start_polling(bot)
 
 
 if __name__ == "__main__":
