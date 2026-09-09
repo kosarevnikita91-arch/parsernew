@@ -2,6 +2,7 @@ from pathlib import Path
 import asyncio
 import sqlite3
 from telethon import TelegramClient
+import logging
 
 from aiogram import Bot, Dispatcher
 from aiogram.filters import Command
