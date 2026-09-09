@@ -1352,7 +1352,7 @@ async def main() -> None:
 
     await telegram_client.connect()
 
-    if not await telegram_client.is_user_authorized():
+    if not await Telegram_client.is_user_authorized():
         print(
             "Сессия не авторизована. "
             "Проверь файл telegram_profile.session"
