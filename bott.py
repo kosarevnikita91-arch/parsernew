@@ -41,9 +41,10 @@ from telethon import TelegramClient
 import asyncio
 from telethon import TelegramClient
 
-API_ID = 123456
-API_HASH = "ваш_api_hash"
-BOT_TOKEN = "ваш_bot_token"
+API_ID = int(os.environ["API_ID"])
+API_HASH = os.environ["API_HASH"]
+BOT_TOKEN = os.environ["BOT_TOKEN"]
+
 
 telegram_client = TelegramClient(
     "/app/parser_session",
