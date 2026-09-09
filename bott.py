@@ -38,29 +38,29 @@ import asyncio
 from pathlib import Path
 from telethon import TelegramClient
 
-API_ID = int(os.getenv("API_ID"))
-API_HASH = os.getenv("API_HASH")
-BOT_TOKEN = os.getenv("BOT_TOKEN")
+import asyncio
+from telethon import TelegramClient
 
-SESSION_PATH = Path("/app/parser_session")
+API_ID = 123456
+API_HASH = "ваш_api_hash"
+BOT_TOKEN = "ваш_bot_token"
 
 telegram_client = TelegramClient(
-    str(SESSION_PATH),
+    "/app/parser_session",
     API_ID,
     API_HASH
 )
-print("telegram_client создан:", "telegram_client" in globals())
-print("Файл:", __file__)
+
 
 async def main():
     await telegram_client.start(bot_token=BOT_TOKEN)
-
     print("Бот запущен")
     await telegram_client.run_until_disconnected()
 
 
 if __name__ == "__main__":
     asyncio.run(main())
+
 
 
 
