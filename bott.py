@@ -37,43 +37,30 @@ from telethon.tl.types import (
 
 import os
 import asyncio
-from pathlib import Path
-from telethon import TelegramClient
+import logging
 
-import asyncio
-from telethon import TelegramClient
+from telethon import TelegramClient, events
+
 
 logging.basicConfig(
     level=logging.INFO,
-    format="%(asctime)s | %(levelname)s | %(message)s"
+    format="%(asctime)s | %(levelname)s | %(message)s",
+    force=True
 )
 
 print("Файл bott.py запущен", flush=True)
 
-try:
-    API_ID = int(os.environ["API_ID"])
-    API_HASH = os.environ["API_HASH"]
-    BOT_TOKEN = os.environ["BOT_TOKEN"]
-
-    print("Переменные окружения загружены", flush=True)
-    print(f"API_ID: {API_ID}", flush=True)
-    print(f"API_HASH задан: {bool(API_HASH)}", flush=True)
-    print(f"BOT_TOKEN задан: {bool(BOT_TOKEN)}", flush=True)
-
-except KeyError as error:
-    print(f"Не задана переменная окружения: {error.args[0]}", flush=True)
-    raise
-except ValueError:
-    print("Ошибка: API_ID должен быть целым числом", flush=True)
-    raise
 API_ID = int(os.environ["API_ID"])
 API_HASH = os.environ["API_HASH"]
 BOT_TOKEN = os.environ["BOT_TOKEN"]
 
-@telegram_client.on(events.NewMessage(pattern="/start"))
-async def start_handler(event):
-    await event.respond("Бот работает!")
+print("Переменные окружения загружены", flush=True)
+print(f"API_ID: {API_ID}", flush=True)
+print(f"API_HASH задан: {bool(API_HASH)}", flush=True)
+print(f"BOT_TOKEN задан: {bool(BOT_TOKEN)}", flush=True)
 
+
+# Сначала создаём клиент
 telegram_client = TelegramClient(
     "/app/parser_session",
     API_ID,
@@ -81,14 +68,31 @@ telegram_client = TelegramClient(
 )
 
 
+# И только после этого объявляем обработчики
+@telegram_client.on(events.NewMessage(pattern=r"^/start$"))
+async def start_handler(event):
+    await event.respond("Бот работает!")
+
+
 async def main():
+    print("Подключение к Telegram...", flush=True)
+
     await telegram_client.start(bot_token=BOT_TOKEN)
-    print("Бот запущен")
+
+    me = await telegram_client.get_me()
+    print(
+        f"Бот авторизован: @{me.username or me.id}",
+        flush=True
+    )
+
+    print("Бот успешно запущен", flush=True)
+
     await telegram_client.run_until_disconnected()
 
 
 if __name__ == "__main__":
     asyncio.run(main())
+
 
 
 
