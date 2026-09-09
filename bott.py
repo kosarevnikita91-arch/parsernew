@@ -60,7 +60,6 @@ print(f"API_HASH задан: {bool(API_HASH)}", flush=True)
 print(f"BOT_TOKEN задан: {bool(BOT_TOKEN)}", flush=True)
 
 
-# Сначала создаём клиент
 telegram_client = TelegramClient(
     "/app/parser_session",
     API_ID,
@@ -68,7 +67,6 @@ telegram_client = TelegramClient(
 )
 
 
-# И только после этого объявляем обработчики
 @telegram_client.on(events.NewMessage(pattern=r"^/start$"))
 async def start_handler(event):
     await event.respond("Бот работает!")
@@ -80,10 +78,7 @@ async def main():
     await telegram_client.start(bot_token=BOT_TOKEN)
 
     me = await telegram_client.get_me()
-    print(
-        f"Бот авторизован: @{me.username or me.id}",
-        flush=True
-    )
+    print(f"Бот авторизован: @{me.username or me.id}", flush=True)
 
     print("Бот успешно запущен", flush=True)
 
@@ -92,7 +87,6 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
-
 
 
 
