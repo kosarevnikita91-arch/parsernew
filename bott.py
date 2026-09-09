@@ -35,12 +35,20 @@ from telethon.tl.types import (
 import os
 from dotenv import load_dotenv
 from telethon import TelegramClient
-SESSION_PATH = Path("/app/telegram_profile")
+SESSION_PATH = Path("/app/session")
 
-load_dotenv()
-str(SESSION_PATH),
-api_id = int(os.getenv("API_ID"))
-api_hash = os.getenv("API_HASH")
+telegram_client = TelegramClient(
+    str(SESSION_PATH),
+    api_hash,
+    api_hash
+)
+
+async def main():
+    await telegram_client.start(bot_token=BOT_TOKEN)
+    print("Бот авторизован и запущен")
+
+with telegram_client:
+    telegram_client.loop.run_until_complete(main())
 
 
 
