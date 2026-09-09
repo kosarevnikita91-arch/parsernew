@@ -1,8 +1,9 @@
 from pathlib import Path
 import asyncio
 import sqlite3
-from telethon import TelegramClient
+from telethon import TelegramClient, events
 import logging
+
 
 from aiogram import Bot, Dispatcher
 from aiogram.filters import Command
@@ -69,6 +70,9 @@ API_ID = int(os.environ["API_ID"])
 API_HASH = os.environ["API_HASH"]
 BOT_TOKEN = os.environ["BOT_TOKEN"]
 
+@telegram_client.on(events.NewMessage(pattern="/start"))
+async def start_handler(event):
+    await event.respond("Бот работает!")
 
 telegram_client = TelegramClient(
     "/app/parser_session",
