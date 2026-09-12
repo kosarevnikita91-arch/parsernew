@@ -1376,24 +1376,38 @@ async def try_command(message: Message):
 # Запуск
 # =========================================================
 async def main():
-    print("Подключение к Telegram...", flush=True)
+    print("MAIN ЗАПУЩЕН", flush=True)
 
     await telegram_client.start(bot_token=BOT_TOKEN)
 
-    me = await telegram_client.get_me()
-    print(
-        f"Бот авторизован: @{me.username or me.id}",
-        flush=True,
-    )
+    print("TELETHON ЗАПУЩЕН", flush=True)
 
     init_db()
 
-    print("Запускаю Telethon и aiogram", flush=True)
+    print("AIROGRAM POLLING ЗАПУСКАЕТСЯ", flush=True)
 
-    await asyncio.gather(
-        telegram_client.run_until_disconnected(),
-        dp.start_polling(bot),
+    telethon_task = asyncio.create_task(
+        telegram_client.run_until_disconnected()
     )
+
+    aiogram_task = asyncio.create_task(
+        dp.start_polling(bot)
+    )
+
+    done, pending = await asyncio.wait(
+        [telethon_task, aiogram_task],
+        return_when=asyncio.FIRST_EXCEPTION,
+    )
+
+    for task in done:
+        error = task.exception()
+
+        if error:
+            print(
+                f"ОШИБКА ЗАДАЧИ: {repr(error)}",
+                flush=True,
+            )
+            raise error
 
 
 if __name__ == "__main__":
