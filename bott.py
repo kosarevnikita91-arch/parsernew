@@ -1383,30 +1383,12 @@ async def main():
 
     init_db()
 
-    print("AIROGRAM POLLING ЗАПУСКАЕТСЯ", flush=True)
+    print("AIROGRAM ЗАПУСКАЕТСЯ", flush=True)
 
-    telethon_task = asyncio.create_task(
-        telegram_client.run_until_disconnected()
+    await asyncio.gather(
+        telegram_client.run_until_disconnected(),
+        dp.start_polling(bot),
     )
-
-    aiogram_task = asyncio.create_task(
-        dp.start_polling(bot)
-    )
-
-    done, pending = await asyncio.wait(
-        [telethon_task, aiogram_task],
-        return_when=asyncio.FIRST_EXCEPTION,
-    )
-
-    for task in done:
-        error = task.exception()
-
-        if error:
-            print(
-                f"ОШИБКА ЗАДАЧИ: {repr(error)}",
-                flush=True,
-            )
-            raise error
 
 
 if __name__ == "__main__":
