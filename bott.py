@@ -1381,20 +1381,11 @@ async def try_command(message: Message):
 # Запуск
 # =========================================================
 async def main():
-    print("MAIN ЗАПУЩЕН", flush=True)
-
-    await telegram_client.start(bot_token=BOT_TOKEN)
-
-    print("TELETHON ЗАПУЩЕН", flush=True)
+    print("ЗАПУСК ТОЛЬКО AIROGRAM", flush=True)
 
     init_db()
 
-    print("AIROGRAM ЗАПУСКАЕТСЯ", flush=True)
-
-    await asyncio.gather(
-        telegram_client.run_until_disconnected(),
-        dp.start_polling(bot),
-    )
+    await dp.start_polling(bot)
 
 
 if __name__ == "__main__":
