@@ -1210,6 +1210,11 @@ async def status_command(message: Message):
 
 @dp.message(Command("count"))
 async def count_command(message: Message):
+    print(
+        f"ПОЛУЧЕНА КОМАНДА COUNT: {message.from_user.id}",
+        flush=True,
+    )
+
     if not is_authorized(message.from_user.id):
         await message.answer("Нет доступа.")
         return
@@ -1219,6 +1224,7 @@ async def count_command(message: Message):
     await message.answer(
         f"Новых пользователей: {count}/{TARGET_USERS}"
     )
+
 
 
 
