@@ -1217,9 +1217,9 @@ async def count_command(message: Message):
     count = get_unassigned_count()
 
     await message.answer(
-        f"Новых пользователей: "
-        f"{count}/{TARGET_USERS}"
+        f"Новых пользователей: {count}/{TARGET_USERS}"
     )
+
 
 
 @dp.message(Command("stay"))
