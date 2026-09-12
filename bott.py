@@ -1194,13 +1194,14 @@ async def status_command(message: Message):
         return
 
     if parsing_task and not parsing_task.done():
-        state = "запущен"
-    else:
-        state = "не запущен"
+    state = "запущен"
+else:
+    state = "не запущен"
 
-        count = get_unassigned_count()
+    count = get_unassigned_count()
 
-        await message.answer(
+    await message.answer(
+
             f"Статус: {state}\n"
             f"{get_remaining_time_text()}\n"
             f"Пользователей: {count}/{TARGET_USERS}\n"
