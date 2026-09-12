@@ -1382,10 +1382,18 @@ async def main():
     me = await telegram_client.get_me()
     print(
         f"Бот авторизован: @{me.username or me.id}",
-        flush=True
+        flush=True,
     )
 
-    print("Бот успешно запущен", flush=True)
+    init_db()
 
-    await telegram_client.run_until_disconnected()
+    print("Запускаю Telethon и aiogram", flush=True)
 
+    await asyncio.gather(
+        telegram_client.run_until_disconnected(),
+        dp.start_polling(bot),
+    )
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
