@@ -92,6 +92,18 @@ async def main():
 # =========================================================
 
 
+@dp.message(Command("start"))
+async def start_handler(message: Message):
+    print(
+        f"AIOGRAM получил /start от {message.from_user.id}",
+        flush=True,
+    )
+
+    if not is_authorized(message.from_user.id):
+        await message.answer("Доступ запрещён.")
+        return
+
+    await message.answer("Команда обработана через aiogram")
 
 
 
