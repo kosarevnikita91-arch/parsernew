@@ -1349,3 +1349,8 @@ async def main():
 
     print("ШАГ 5: запускаю polling", flush=True)
     await asyncio.gather(dp.start_polling(bot), telegram_client.run_until_disconnected())
+    
+if __name__ == "__main__":
+    asyncio.run(main())
+
+
