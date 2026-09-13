@@ -529,20 +529,18 @@ async def resolve_source(source_text: str):
 # =========================================================
 
 async def get_stay_folder_id():
-    print("Фильтры диалогов недоступны для bot-сессии", flush=True)
-    return None
+    result = await telegram_client(
+        GetDialogFiltersRequest()
+    )
 
-
-    for folder in result.filters:
-        if not isinstance(folder, DialogFilter):
-            continue
-
-        title = str(folder.title)
+    for dialog_filter in result:
+        title = getattr(dialog_filter, "title", "")
 
         if title.lower() == "stay":
-            return folder.id
+            return dialog_filter.id
 
     return None
+
 
 
 async def get_channels_from_stay():
