@@ -3,7 +3,10 @@ import asyncio
 import sqlite3
 from telethon import TelegramClient, events
 import logging
-
+from datetime import datetime, timezone
+from collections import Counter
+import re
+import logging
 
 from aiogram import Bot, Dispatcher
 from aiogram.filters import Command
@@ -53,6 +56,7 @@ print("Файл bott.py запущен", flush=True)
 API_ID = int(os.environ["API_ID"])
 API_HASH = os.environ["API_HASH"]
 BOT_TOKEN = os.environ["BOT_TOKEN"]
+SESSION_PATH = Path("/app/parser_session")
 
 print("Переменные окружения загружены", flush=True)
 print(f"API_ID: {API_ID}", flush=True)
@@ -61,35 +65,23 @@ print(f"BOT_TOKEN задан: {bool(BOT_TOKEN)}", flush=True)
 
 
 telegram_client = TelegramClient(
-    "/app/parser_session",
+    str(SESSION_PATH),
     API_ID,
-    API_HASH
+    API_HASH,
 )
-
-
-@telegram_client.on(events.NewMessage(pattern=r"^/start$"))
-async def start_handler(event):
-    await event.respond("Бот работает!")
 
 
 async def main():
     print("Подключение к Telegram...", flush=True)
 
-    await telegram_client.start(bot_token=BOT_TOKEN)
+    await telegram_client.start()
 
     me = await telegram_client.get_me()
     print(f"Бот авторизован: @{me.username or me.id}", flush=True)
 
     print("Бот успешно запущен", flush=True)
 
-    await telegram_client.run_until_disconnected()
-
-
-if __name__ == "__main__":
-    asyncio.run(main())
-
-
-
+    await asyncio.gather(     dp.start_polling(bot),     telegram_client.run_until_disconnected(), )
 
 
 
@@ -1155,15 +1147,22 @@ async def start_command(message: Message):
         )
         return
 
+    @dp.message(Command("start"))
+async def start_handler(message: Message):
+    if not is_authorized(message.from_user.id):
+        await message.answer("Доступ запрещён.")
+        return
+
     await message.answer(
-        "Бот готов.\n\n"
+        "Бот готов!\n"
         "/auto — запустить парсинг на 6 часов\n"
         "/status — показать статус и время\n"
         "/stay — обработать каналы из Stay\n"
-        "/pars ссылка — обработать один источник\n"
+        "/parse — показать общий список участников\n"
         "/try — показать 50 пользователей\n"
         "/count — показать количество"
     )
+
 
 
 @dp.message(Command("auto"))
@@ -1373,36 +1372,26 @@ async def try_command(message: Message):
     )
 
 
-# =========================================================
-# Запуск
-# =========================================================
+
 
    # =========================================================
 # Запуск
 # =========================================================
 async def main():
-    print("MAIN ЗАПУЩЕН", flush=True)
+    print("Подключение пользовательского аккаунта...", flush=True)
 
-    await telegram_client.start(bot_token=BOT_TOKEN)
+    await telegram_client.start()
 
     me = await telegram_client.get_me()
     print(
-        f"Бот авторизован: @{me.username or me.id}",
+        f"Telethon авторизован как: "
+        f"@{me.username or me.id}",
         flush=True,
     )
 
-    init_db()
-
-    print("AIROGRAM ЗАПУСКАЕТСЯ", flush=True)
-
     await asyncio.gather(
-        telegram_client.run_until_disconnected(),
         dp.start_polling(bot),
+        telegram_client.run_until_disconnected(),
     )
-
-
-
-
-
 if __name__ == "__main__":
     asyncio.run(main())
