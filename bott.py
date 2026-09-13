@@ -75,7 +75,7 @@ telegram_client = TelegramClient(
 async def main():
     print("Подключение к Telegram...", flush=True)
 
-    await telegram_client.start()
+    await telegram_client.start(bot_token=BOT_TOKEN)
 
     me = await telegram_client.get_me()
     print(f"Бот авторизован: @{me.username or me.id}", flush=True)
