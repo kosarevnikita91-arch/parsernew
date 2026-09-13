@@ -1150,28 +1150,6 @@ async def start_auto_parsing():
 # Команды бота
 # =========================================================
 
-
-
-
-
-@dp.message(Command("auto"))
-async def auto_command(message: Message):
-    if not is_authorized(message.from_user.id):
-        await message.answer("Нет доступа.")
-        return
-
-    started = await start_auto_parsing()
-
-    if not started:
-        await message.answer(
-            "Автоматический парсинг уже запущен."
-        )
-        return
-
-    await message.answer(
-        "Автоматический парсинг запущен "
-        "на 6 часов."
-    )
 @dp.message(Command("start"))
 async def start_handler(message: Message):
     if not is_authorized(message.from_user.id):
@@ -1190,25 +1168,6 @@ async def start_handler(message: Message):
 
 
 
-@dp.message(Command("status"))
-async def status_command(message: Message):
-    if not is_authorized(message.from_user.id):
-        await message.answer("Нет доступа.")
-        return
-
-    if parsing_task and not parsing_task.done():
-        state = "запущен"
-    else:
-        state = "не запущен"
-
-    count = get_unassigned_count()
-
-    await message.answer(
-        f"Статус: {state}\n"
-        f"{get_remaining_time_text()}\n"
-        f"Пользователей: {count}/{TARGET_USERS}\n"
-        f"Не хватает: {max(0, TARGET_USERS - count)}"
-    )
 
 
 @dp.message(Command("count"))
