@@ -1344,20 +1344,14 @@ async def try_command(message: Message):
 # Запуск
 # =========================================================
 async def main():
-    print("Подключение пользовательского аккаунта...", flush=True)
+    print("Подключение к Telegram...", flush=True)
 
-    await telegram_client.start()
+    await telegram_client.start(bot_token=BOT_TOKEN)
 
     me = await telegram_client.get_me()
-    print(
-        f"Telethon авторизован как: "
-        f"@{me.username or me.id}",
-        flush=True,
-    )
+    print(f"Бот авторизован: @{me.username or me.id}", flush=True)
 
     await asyncio.gather(
         dp.start_polling(bot),
         telegram_client.run_until_disconnected(),
     )
-if __name__ == "__main__":
-    asyncio.run(main())
