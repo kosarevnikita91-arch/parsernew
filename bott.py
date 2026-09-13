@@ -1149,7 +1149,6 @@ async def start_auto_parsing():
 # =========================================================
 # Команды бота
 # =========================================================
-
 @dp.message(Command("start"))
 async def start_handler(message: Message):
     if not is_authorized(message.from_user.id):
@@ -1165,6 +1164,7 @@ async def start_handler(message: Message):
         "/try — показать 50 пользователей\n"
         "/count — показать количество"
     )
+
 
 
 
