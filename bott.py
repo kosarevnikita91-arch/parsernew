@@ -1342,9 +1342,10 @@ async def main():
 
     print("ШАГ 2: запускаю Telegram-клиент", flush=True)
     await telegram_client.start(bot_token=BOT_TOKEN)
-    print("ШАГ 3: Telegram-клиент запущен", flush=True)
 
+    print("ШАГ 3: Telegram-клиент запущен", flush=True)
     me = await telegram_client.get_me()
+
     print(f"ШАГ 4: бот авторизован: @{me.username or me.id}", flush=True)
 
     print("ШАГ 5: запускаю polling", flush=True)
