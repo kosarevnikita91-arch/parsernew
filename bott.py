@@ -1336,8 +1336,19 @@ print(f"Telethon: id={me.id}, bot={me.bot}", flush=True)
 
    # =========================================================
 # Запуск
-# =========================================================
+# ==========================================================
 async def main():
-    print("...")
+    print("Запуск приложения...")
+
     await telegram_client.start(bot_token=BOT_TOKEN)
+
+    me = await telegram_client.get_me()
+    print(f"Бот: @{me.username or me.id}")
+
+    await dp.start_polling(bot)
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
+
     
