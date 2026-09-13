@@ -57,8 +57,7 @@ API_ID = int(os.environ["API_ID"])
 API_HASH = os.environ["API_HASH"]
 BOT_TOKEN = os.environ["BOT_TOKEN"]
 SESSION_PATH = Path("/app/parser_session")
-bot = Bot(token=BOT_TOKEN)
-dp = Dispatcher()
+
 
 print("Переменные окружения загружены", flush=True)
 print(f"API_ID: {API_ID}", flush=True)
@@ -92,6 +91,8 @@ async def main():
 # =========================================================
 # Настройки
 # =========================================================
+bot = Bot(token=BOT_TOKEN)
+dp = Dispatcher()
 
 
 @dp.message(Command("start"))
