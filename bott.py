@@ -1348,11 +1348,6 @@ async def main():
     print(f"ШАГ 4: бот авторизован: @{me.username or me.id}", flush=True)
 
     print("ШАГ 5: запускаю polling", flush=True)
+    await asyncio.gather(dp.start_polling(bot), telegram_client.run_until_disconnected())
 
-    await asyncio.gather(
-        dp.start_polling(bot),
-        telegram_client.run_until_disconnected(),
-    )
-
-        telegram_client.run_until_disconnected(),
     )
