@@ -1340,4 +1340,4 @@ print(f"Telethon: id={me.id}, bot={me.bot}", flush=True)
 async def main():
     print("...")
     await telegram_client.start(bot_token=BOT_TOKEN)
-    me = await telegram_client.get_me()
+    
