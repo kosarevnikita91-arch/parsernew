@@ -1340,20 +1340,6 @@ print(f"Telethon: id={me.id}, bot={me.bot}", flush=True)
 # Запуск
 # =========================================================
 async def main():
-    print("Подключение к Telegram...", flush=True)
-
+    print("...")
     await telegram_client.start(bot_token=BOT_TOKEN)
-
     me = await telegram_client.get_me()
-    print(f"Бот авторизован: @{me.username or me.id}", flush=True)
-    print("Бот успешно запущен", flush=True)
-
-    await asyncio.gather(
-        dp.start_polling(bot),
-        telegram_client.run_until_disconnected(),
-    )
-
-
-if __name__ == "__main__":
-    asyncio.run(main())
-
