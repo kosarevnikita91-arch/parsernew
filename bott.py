@@ -179,33 +179,26 @@ db = sqlite3.connect(
 
 db.row_factory = sqlite3.Row
 
-
 def init_db():
     db.execute("""
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-
             telegram_id INTEGER UNIQUE NOT NULL,
             username TEXT,
             first_name TEXT,
             last_name TEXT,
-
             deleted INTEGER DEFAULT 0,
             premium INTEGER DEFAULT 0,
             last_seen TEXT DEFAULT 'hidden',
             is_admin INTEGER DEFAULT 0,
-
             possible_bot INTEGER DEFAULT 0,
             bot_reasons TEXT,
-
             source_chat_id INTEGER,
             source_chat_title TEXT,
             source_message_id INTEGER,
             source_message_link TEXT,
-
             comment_count INTEGER DEFAULT 0,
             assigned INTEGER DEFAULT 0,
-
             created_at TEXT DEFAULT CURRENT_TIMESTAMP,
             updated_at TEXT DEFAULT CURRENT_TIMESTAMP
         )
@@ -216,12 +209,13 @@ def init_db():
             chat_id INTEGER NOT NULL,
             post_id INTEGER NOT NULL,
             processed_at TEXT DEFAULT CURRENT_TIMESTAMP,
-
             PRIMARY KEY (chat_id, post_id)
         )
     """)
 
     db.commit()
+init_db()
+
 
 
 # =========================================================
