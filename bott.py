@@ -1150,30 +1150,7 @@ async def start_auto_parsing():
 # Команды бота
 # =========================================================
 
-@dp.message(Command("start"))
-async def start_command(message: Message):
-    if not is_authorized(message.from_user.id):
-        await message.answer(
-            "Твой Telegram ID не добавлен "
-            "в список операторов."
-        )
-        return
 
-    @dp.message(Command("start"))
-async def start_handler(message: Message):
-    if not is_authorized(message.from_user.id):
-        await message.answer("Доступ запрещён.")
-        return
-
-    await message.answer(
-        "Бот готов!\n"
-        "/auto — запустить парсинг на 6 часов\n"
-        "/status — показать статус и время\n"
-        "/stay — обработать каналы из Stay\n"
-        "/parse — показать общий список участников\n"
-        "/try — показать 50 пользователей\n"
-        "/count — показать количество"
-    )
 
 
 
@@ -1194,6 +1171,21 @@ async def auto_command(message: Message):
     await message.answer(
         "Автоматический парсинг запущен "
         "на 6 часов."
+    )
+@dp.message(Command("start"))
+async def start_handler(message: Message):
+    if not is_authorized(message.from_user.id):
+        await message.answer("Доступ запрещён.")
+        return
+
+    await message.answer(
+        "Бот готов!\n"
+        "/auto — запустить парсинг на 6 часов\n"
+        "/status — показать статус и время\n"
+        "/stay — обработать каналы из Stay\n"
+        "/parse — показать общий список участников\n"
+        "/try — показать 50 пользователей\n"
+        "/count — показать количество"
     )
 
 
