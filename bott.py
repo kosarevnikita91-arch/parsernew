@@ -529,9 +529,9 @@ async def resolve_source(source_text: str):
 # =========================================================
 
 async def get_stay_folder_id():
-    result = await telegram_client(
-        GetDialogFiltersRequest()
-    )
+    print("Фильтры диалогов недоступны для bot-сессии", flush=True)
+    return None
+
 
     for folder in result.filters:
         if not isinstance(folder, DialogFilter):
@@ -1332,6 +1332,8 @@ async def try_command(message: Message):
     )
 
 
+me = await telegram_client.get_me()
+print(f"Telethon: id={me.id}, bot={me.bot}", flush=True)
 
 
    # =========================================================
@@ -1341,7 +1343,8 @@ async def main():
     print("ШАГ 1: main запущена", flush=True)
     print("ШАГ 2: запускаю Telegram-клиент", flush=True)
 
-    await telegram_client.start(bot_token=BOT_TOKEN)
+    await telegram_client.start()
+
 
     print("ШАГ 3: Telegram-клиент запущен", flush=True)
     me = await telegram_client.get_me()
